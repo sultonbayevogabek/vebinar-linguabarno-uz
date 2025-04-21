@@ -2,7 +2,7 @@
 
 class Statistics {
   PROJECT_NAME = window.location.host.replace(/\./g, '-');
-  DB_URL = 'https://webinar-statistics-default-rtdb.firebaseio.com/';
+  DB_URL = 'https://webinar-pages-statistics-default-rtdb.firebaseio.com/';
   ENTERED_DB = `${this.DB_URL}${this.PROJECT_NAME}-entered.json`;
   CLICKED_REG_BTN_DB = `${this.DB_URL}${this.PROJECT_NAME}-clicked-reg-btn.json`;
   SUBMITTED_FORM_DB = `${this.DB_URL}${this.PROJECT_NAME}-submitted-form.json`;
@@ -24,6 +24,17 @@ class Statistics {
 
   get time() {
     return new Date().getTime();
+  }
+
+  getUtmParams() {
+    const queryParams = new URLSearchParams(
+      window.location.search
+    );
+    return {
+      utmSource: queryParams.get("utm_source") ?? '-',
+      utmMedium: queryParams.get("utm_medium") ?? '-',
+      utmCampaign: queryParams.get("utm_campaign") ?? '-'
+    };
   }
 
   getUserDeviceInfo() {
@@ -139,12 +150,14 @@ class Statistics {
 
     let response = await fetch(DB_URL, {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify({
+        ...data,
+        ...this.getUtmParams()
+      })
     })
 
     response = await response.json()
     if (response && response.name) {
-      console.log(action)
       this.recordAction(action)
     }
   }
