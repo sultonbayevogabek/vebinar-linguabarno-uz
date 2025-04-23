@@ -56,7 +56,7 @@
   </div>
 
   <!-- Summary Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
     <div class="bg-white p-4 rounded-lg shadow-md">
       <h3 class="text-sm font-medium text-gray-500">Total Visits</h3>
       <p id="totalVisits" class="text-2xl font-bold text-gray-800">0</p>
@@ -70,10 +70,6 @@
       <p id="formSubmissions" class="text-2xl font-bold text-gray-800">0</p>
     </div>
     <div class="bg-white p-4 rounded-lg shadow-md">
-      <h3 class="text-sm font-medium text-gray-500">Google Sheets Entries</h3>
-      <p id="sheetsEntries" class="text-2xl font-bold text-gray-800">0</p>
-    </div>
-    <div class="bg-white p-4 rounded-lg shadow-md">
       <h3 class="text-sm font-medium text-gray-500">Telegram Subscriptions</h3>
       <p id="telegramSubs" class="text-2xl font-bold text-gray-800">0</p>
     </div>
@@ -82,7 +78,7 @@
   <!-- Conversion Rate Card -->
   <div class="bg-white p-6 rounded-lg shadow-md mb-6">
     <h2 class="text-xl font-semibold mb-4 text-gray-700">Conversion Rates</h2>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
       <div>
         <h3 class="text-sm font-medium text-gray-500">Visit to Registration</h3>
         <p id="visitToReg" class="text-2xl font-bold text-gray-800">0%</p>
@@ -90,10 +86,6 @@
       <div>
         <h3 class="text-sm font-medium text-gray-500">Registration to Form</h3>
         <p id="regToForm" class="text-2xl font-bold text-gray-800">0%</p>
-      </div>
-      <div>
-        <h3 class="text-sm font-medium text-gray-500">Form to Sheets</h3>
-        <p id="formToSheets" class="text-2xl font-bold text-gray-800">0%</p>
       </div>
       <div>
         <h3 class="text-sm font-medium text-gray-500">Sheets to Telegram</h3>
@@ -160,22 +152,6 @@
       </div>
       <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-purple-200">
         <div id="funnelFormSubmitBar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500" style="width: 50%"></div>
-      </div>
-
-      <div class="flex mb-2 items-center justify-between">
-        <div>
-          <span class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-orange-600 bg-orange-200">
-            Google Sheets
-          </span>
-        </div>
-        <div class="text-right">
-          <span id="funnelSheets" class="text-xs font-semibold inline-block text-orange-600">
-            0
-          </span>
-        </div>
-      </div>
-      <div class="overflow-hidden h-2 mb-4 text-xs flex rounded bg-orange-200">
-        <div id="funnelSheetsBar" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-orange-500" style="width: 30%"></div>
       </div>
 
       <div class="flex mb-2 items-center justify-between">
@@ -271,18 +247,15 @@
       document.getElementById('totalVisits').textContent = visitFiltered.length;
       document.getElementById('regButtonClicks').textContent = regButtonFiltered.length;
       document.getElementById('formSubmissions').textContent = formSubmitFiltered.length;
-      document.getElementById('sheetsEntries').textContent = sheetsFiltered.length;
       document.getElementById('telegramSubs').textContent = telegramFiltered.length;
 
       // Calculate and update conversion rates
       const visitToRegRate = visitFiltered.length ? (regButtonFiltered.length / visitFiltered.length * 100).toFixed(1) : '0';
       const regToFormRate = regButtonFiltered.length ? (formSubmitFiltered.length / regButtonFiltered.length * 100).toFixed(1) : '0';
-      const formToSheetsRate = formSubmitFiltered.length ? (sheetsFiltered.length / formSubmitFiltered.length * 100).toFixed(1) : '0';
       const sheetsToTelegramRate = sheetsFiltered.length ? (telegramFiltered.length / sheetsFiltered.length * 100).toFixed(1) : '0';
 
       document.getElementById('visitToReg').textContent = `${visitToRegRate}%`;
       document.getElementById('regToForm').textContent = `${regToFormRate}%`;
-      document.getElementById('formToSheets').textContent = `${formToSheetsRate}%`;
       document.getElementById('sheetsToTelegram').textContent = `${sheetsToTelegramRate}%`;
 
       // Update funnel visualization
@@ -298,7 +271,6 @@
       document.getElementById('funnelVisits').textContent = visits;
       document.getElementById('funnelRegButton').textContent = regButton;
       document.getElementById('funnelFormSubmit').textContent = formSubmit;
-      document.getElementById('funnelSheets').textContent = sheets;
       document.getElementById('funnelTelegram').textContent = telegram;
 
       // Calculate percentages for progress bars (relative to visits)
@@ -313,7 +285,6 @@
       document.getElementById('funnelVisitsBar').style.width = '100%';
       document.getElementById('funnelRegButtonBar').style.width = `${regButtonPercent}%`;
       document.getElementById('funnelFormSubmitBar').style.width = `${formSubmitPercent}%`;
-      document.getElementById('funnelSheetsBar').style.width = `${sheetsPercent}%`;
       document.getElementById('funnelTelegramBar').style.width = `${telegramPercent}%`;
     }
 
