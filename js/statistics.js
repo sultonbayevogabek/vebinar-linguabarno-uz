@@ -1,7 +1,7 @@
 'use strict';
 
 class Statistics {
-  PROJECT_NAME = 'vebinar-linguabarno-uz';
+  PROJECT_NAME = window.location.host.replace(/\./g, '-');
   DB_URL = 'https://webinar-pages-statistics-default-rtdb.firebaseio.com/';
   ENTERED_DB = `${this.DB_URL}${this.PROJECT_NAME}-entered.json`;
   CLICKED_REG_BTN_DB = `${this.DB_URL}${this.PROJECT_NAME}-clicked-reg-btn.json`;
