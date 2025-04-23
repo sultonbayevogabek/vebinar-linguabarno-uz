@@ -43,8 +43,6 @@ async function fetchData() {
     const statistic = new Statistics();
     originalData = await statistic.getStatisticsData();
 
-    console.log('data ====>', originalData);
-
     return originalData;
   } catch (error) {
     showError(error.message);

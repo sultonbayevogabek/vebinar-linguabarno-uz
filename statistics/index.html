@@ -245,9 +245,9 @@
 
       // Update summary cards
       document.getElementById('totalVisits').textContent = visitFiltered.length;
-      document.getElementById('regButtonClicks').textContent = regButtonFiltered.length;
-      document.getElementById('formSubmissions').textContent = formSubmitFiltered.length;
-      document.getElementById('telegramSubs').textContent = telegramFiltered.length;
+      document.getElementById('regButtonClicks').textContent = `${ regButtonFiltered.length } / ${ (regButtonFiltered.length / visitFiltered.length * 100).toFixed(2) }%`;
+      document.getElementById('formSubmissions').textContent = `${ formSubmitFiltered.length } / ${ (formSubmitFiltered.length / regButtonFiltered.length * 100).toFixed(2) }%`;
+      document.getElementById('telegramSubs').textContent = `${ telegramFiltered.length } / ${ (telegramFiltered.length / formSubmitFiltered.length * 100).toFixed(2) }% / ${ (telegramFiltered.length / visitFiltered.length * 100).toFixed(2) }%`;
 
       // Calculate and update conversion rates
       const visitToRegRate = visitFiltered.length ? (regButtonFiltered.length / visitFiltered.length * 100).toFixed(1) : '0';
