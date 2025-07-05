@@ -7,7 +7,7 @@
   joinButton?.addEventListener('click', async (e) => {
     joinButton.disabled = true;
     joinButton.disabled = false;
-    window.location.href = 'https://t.me/+rJKniU7twfYyODUy';
+    window.location.href = 'https://t.me/+VlLlrP8vRMk2ZWQy';
   })
 
   if (user && user?.name && user?.phone && user?.time) {
