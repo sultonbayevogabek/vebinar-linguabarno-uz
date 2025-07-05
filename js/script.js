@@ -34,34 +34,6 @@ try {
     e.target.value = result;
   })
 
-  const timers = document.querySelectorAll('time');
-
-  function startCountdown(seconds) {
-    function formatTime(s) {
-      const minutes = String(Math.floor(s / 60)).padStart(2, '0');
-      const seconds = String(s % 60).padStart(2, '0');
-      timers.forEach(el => {
-        el.textContent = `${minutes}:${seconds}`;
-      })
-    }
-
-    let remainingTime = seconds;
-
-    setInterval(() => {
-      formatTime(remainingTime);
-
-      if (remainingTime === 0) {
-        remainingTime = seconds; // Qayta boshlash
-      } else {
-        remainingTime--;
-      }
-    }, 1000);
-  }
-
-  startCountdown(119);
-
-  const statistics = new Statistics();
-
   const registerButtons = document.querySelectorAll('[data-main-button]');
   const modalBackdrop = document.querySelector('[data-modal-backdrop]');
   const modalCloserElements = document.querySelectorAll('[data-modal-close]');
@@ -71,7 +43,6 @@ try {
   registerButtons.forEach(async button => {
     button.addEventListener('click', async () => {
       modalBackdrop.classList.remove('hidden');
-      await statistics.onClickRegBtn();
     })
   })
 
@@ -116,8 +87,6 @@ try {
       submitButton.setAttribute('disabled', true);
       submitButton.textContent = 'Yuborilmoqda...'
 
-      await statistics.onSubmitForm();
-
       localStorage.setItem('user', JSON.stringify({
         name, phone: '+998' + phone, time: new Date().toLocaleString()
       }))
@@ -125,7 +94,7 @@ try {
       submitButton.removeAttribute('disabled');
       submitButton.textContent = "Ro'yxatdan o'tish";
       closeModal();
-      window.location.href = `../telegram.html` + window.location.search;
+      window.location.href = `../telegram.html`;
     }
   })
 } catch (e) {
